@@ -1,0 +1,9 @@
+{
+  "schema": "app/schema/*",
+  "out": "migrations",
+  "driver": "d1",
+  "dbCredentials": {
+    "wranglerConfigPath": "./wrangler.toml",
+    "dbName": "bookee"
+  }
+}

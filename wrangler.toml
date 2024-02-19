@@ -1,4 +1,4 @@
-name = "remix-cloudflare-workers"
+name = "bookee"
 
 workers_dev = true
 main = "./build/index.js"
@@ -10,3 +10,9 @@ compatibility_date = "2023-04-20"
 
 [build]
   command = "npm run build"
+
+[[ d1_databases ]]
+binding = "DB"
+database_name = "bookee"
+database_id = "0bc9b401-7e20-4378-a519-a2e485506a3d"
+migrations_dir = "migrations"
