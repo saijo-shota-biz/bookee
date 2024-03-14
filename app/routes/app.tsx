@@ -34,6 +34,11 @@ export default function AppRoute() {
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
+              <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+                <Link to={"/app/transactions"} prefetch={"none"}>
+                  Transactions
+                </Link>
+              </NavigationMenuLink>
               {!isProduction && (
                 <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
                   <Link to={"/admin"} prefetch={"none"}>

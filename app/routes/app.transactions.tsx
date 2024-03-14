@@ -1,6 +1,6 @@
-import { json, useLoaderData } from "@remix-run/react";
 import { LoaderFunctionArgs } from "@remix-run/cloudflare";
 import { getAuthenticator } from "~/uitl/auth.server";
+import { json } from "@remix-run/react";
 
 export const loader = async ({ context, request }: LoaderFunctionArgs) => {
   const authenticator = getAuthenticator(context);
@@ -11,7 +11,10 @@ export const loader = async ({ context, request }: LoaderFunctionArgs) => {
   return json({ user });
 };
 
-export default function AppIndexRoute() {
-  const { user } = useLoaderData<typeof loader>();
-  return <div>Welcome to {user.username}</div>;
+export default function AppTransactionsRoute() {
+  return (
+    <>
+      <h2 className="text-2xl">Transactions Page</h2>
+    </>
+  );
 }
