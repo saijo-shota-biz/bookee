@@ -12,7 +12,8 @@
     "typecheck": "tsc",
     "format": "npx @biomejs/biome format --write ./app",
     "drizzle-generate": "drizzle-kit generate:sqlite",
-    "db:migration": "wrangler d1 migrations apply bookee --local"
+    "db:migration:local": "wrangler d1 migrations apply bookee --local",
+    "db:migration": "wrangler d1 migrations apply bookee"
   },
   "dependencies": {
     "@cloudflare/kv-asset-handler": "^0.1.3",

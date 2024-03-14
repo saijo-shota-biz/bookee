@@ -9,6 +9,7 @@ import {
 import React from "react";
 import { LoaderFunctionArgs } from "@remix-run/cloudflare";
 import { getAuthenticator } from "~/uitl/auth.server";
+import {isProduction} from "~/uitl/env";
 
 export const loader = async ({ context, request }: LoaderFunctionArgs) => {
   const authenticator = getAuthenticator(context);
@@ -19,8 +20,6 @@ export const loader = async ({ context, request }: LoaderFunctionArgs) => {
   return json({ user });
 };
 export default function AppRoute() {
-  const { user } = useLoaderData<typeof loader>();
-
   return (
     <>
       <nav className="flex py-2 px-4">
@@ -35,11 +34,15 @@ export default function AppRoute() {
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
-              <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                <Link to={"/admin"} prefetch={"none"}>
-                  Admin
-                </Link>
-              </NavigationMenuLink>
+              {
+                isProduction && (
+                  <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+                    <Link to={"/admin"} prefetch={"none"}>
+                      Admin
+                    </Link>
+                  </NavigationMenuLink>
+                )
+              }
               <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
                 <Form method={"post"} action={"/signout"}>
                   <button type={"submit"}>Logout</button>

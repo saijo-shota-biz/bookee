@@ -5,13 +5,6 @@ import { createDBClient } from "~/uitl/db.server";
 import { users } from "~/schema/users";
 import { Button } from "~/components/ui/button";
 
-export const loader = async () => {
-  if (process.env.NODE_ENV === "production") {
-    throw redirect("/");
-  }
-  return json({});
-};
-
 export const action = async ({ context }: ActionFunctionArgs) => {
   const database = createDBClient((context.env as Env).DB);
   await database.delete(users).all();
