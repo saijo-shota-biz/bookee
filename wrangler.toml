@@ -16,3 +16,12 @@ binding = "DB"
 database_name = "bookee"
 database_id = "0bc9b401-7e20-4378-a519-a2e485506a3d"
 migrations_dir = "migrations"
+
+[[kv_namespaces]]
+binding = "SESSION_KV"
+id = "945d366efdaf401ba8c1455cc53f8735"
+preview_id = "af777d7068df4172b7717048407c8565"
+
+# kv_namespaces = [
+#   { binding = "SESSION_KV", id = "945d366efdaf401ba8c1455cc53f8735", preview_id = "af777d7068df4172b7717048407c8565" }
+# ]

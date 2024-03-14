@@ -1,29 +1,15 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
 import { LoaderFunctionArgs } from "@remix-run/cloudflare";
-import { db } from "~/uitl/db";
-import { users } from "~/schema/users";
-import { Env } from "~/types";
-import { json, useLoaderData } from "@remix-run/react";
-import { Button } from "~/components/ui/button";
+import { getAuthenticator } from "~/uitl/auth.server";
 
 export const meta: MetaFunction = () => {
-  return [{ title: "New Remix App" }, { name: "description", content: "Welcome to Remix!" }];
+  return [{ title: "Bookee" }, { name: "description", content: "Book Keeping Web App" }];
 };
 
-export const loader = async ({ context }: LoaderFunctionArgs) => {
-  const u = await db((context.env as Env).DB)
-    .select()
-    .from(users)
-    .all();
-
-  return json({ users: u });
+export const loader = async ({ context, request }: LoaderFunctionArgs) => {
+  const authenticator = getAuthenticator(context);
+  return await authenticator.isAuthenticated(request, {
+    successRedirect: "/app",
+    failureRedirect: "/signin",
+  });
 };
-
-export default function Index() {
-  const { users } = useLoaderData<typeof loader>();
-  return (
-    <div>
-      <Button>test</Button>
-    </div>
-  );
-}
