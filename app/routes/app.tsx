@@ -1,4 +1,4 @@
-import { Form, json, Link, Outlet, useLoaderData } from "@remix-run/react";
+import { Form, json, Link, Outlet } from "@remix-run/react";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -9,7 +9,7 @@ import {
 import React from "react";
 import { LoaderFunctionArgs } from "@remix-run/cloudflare";
 import { getAuthenticator } from "~/uitl/auth.server";
-import {isProduction} from "~/uitl/env";
+import { isProduction } from "~/uitl/env";
 
 export const loader = async ({ context, request }: LoaderFunctionArgs) => {
   const authenticator = getAuthenticator(context);
@@ -34,15 +34,13 @@ export default function AppRoute() {
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
-              {
-                isProduction && (
-                  <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                    <Link to={"/admin"} prefetch={"none"}>
-                      Admin
-                    </Link>
-                  </NavigationMenuLink>
-                )
-              }
+              {!isProduction && (
+                <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+                  <Link to={"/admin"} prefetch={"none"}>
+                    Admin
+                  </Link>
+                </NavigationMenuLink>
+              )}
               <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
                 <Form method={"post"} action={"/signout"}>
                   <button type={"submit"}>Logout</button>
